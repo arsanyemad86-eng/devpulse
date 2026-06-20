@@ -14,7 +14,12 @@ export function Profile() {
   const toggleFollow = useUsersStore((state) => state.toggleFollow);
 
   if (!user) {
-    return <div className="p-8 text-zinc-400">User not found.</div>;
+    return (
+      <div className="max-w-2xl mx-auto py-16 px-4 text-center">
+        <p className="text-lg font-medium text-zinc-300">User not found</p>
+        <p className="text-sm text-zinc-500 mt-1">This profile doesn't exist or may have been removed.</p>
+      </div>
+    );
   }
 
   const userPosts = posts.filter((p) => p.authorId === user.id);
