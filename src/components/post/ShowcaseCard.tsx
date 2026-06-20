@@ -19,7 +19,7 @@ export function ShowcaseCard({ post }: Props) {
       )}
 
       <h3 className="font-semibold text-zinc-100">{post.projectTitle}</h3>
-      <p className="text-zinc-400 text-sm leading-relaxed">{post.content}</p>
+      <p className="text-zinc-400 text-sm leading-relaxed" dir="auto">{post.content}</p>
 
       <div className="flex gap-3 text-sm">
         {post.projectUrl && (

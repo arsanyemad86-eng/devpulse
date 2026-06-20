@@ -13,7 +13,7 @@ export function BuildLogCard({ post }: Props) {
         <span className="text-sm text-zinc-500">{post.projectName}</span>
       </div>
 
-      <p className="text-zinc-200 leading-relaxed">{post.content}</p>
+      <p className="text-zinc-200 leading-relaxed" dir="auto">{post.content}</p>
 
       {post.progressPercentage !== undefined && (
         <div className="space-y-1">

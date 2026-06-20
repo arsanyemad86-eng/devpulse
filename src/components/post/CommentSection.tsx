@@ -41,6 +41,7 @@ export function CommentSection({ postId, initialComments }: Props) {
           value={newCommentText}
           onChange={(e) => setNewCommentText(e.target.value)}
           placeholder="Add a comment..."
+          dir="auto"
           className="flex-1 bg-surface border border-border rounded-lg px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-primary"
           onKeyDown={(e) => {
             if (e.key === 'Enter' && newCommentText.trim() !== '') {

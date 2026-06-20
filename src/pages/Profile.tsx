@@ -44,7 +44,7 @@ export function Profile() {
           )}
         </div>
         <p className="text-zinc-500">@{user.username}</p>
-        <p className="text-zinc-400 text-sm">{user.bio}</p>
+        <p className="text-zinc-400 text-sm" dir="auto">{user.bio}</p>
         <div className="flex gap-4 text-sm text-zinc-500 pt-2">
           <span>{user.followersCount} followers</span>
           <span>{user.followingCount} following</span>

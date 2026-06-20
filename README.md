@@ -1,73 +1,55 @@
-# React + TypeScript + Vite
+# DevPulse
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A community platform for Arabic-speaking developers to share build logs, ask technical questions, and showcase finished projects.
 
-Currently, two official plugins are available:
+## Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[Add your Vercel deployment link here]
 
-## React Compiler
+## Why DevPulse
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Most social platforms force a single content shape. DevPulse is built around three distinct content types that match how developers actually communicate progress: **Build Logs** (incremental updates), **Questions** (Q&A with tags), and **Showcases** (finished work with links).
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **React 19 + TypeScript** — strict typing across the entire data layer using discriminated unions for post types
+- **Vite** — build tooling with route-based code splitting
+- **Tailwind CSS v4** — CSS-first theming via `@theme`
+- **Zustand** — lightweight global state for posts, likes, and follows
+- **React Router v6** — client-side routing with lazy-loaded pages
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Architecture Decisions
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Discriminated unions for posts**: `Post = BuildLogPost | QuestionPost | ShowcasePost`, letting TypeScript narrow types automatically in `PostCard` without manual casting.
+- **Feature-based folder structure**: `components/` holds presentation, `features/` holds state and business logic — swapping mock data for a real API later only touches `features/`.
+- **Tree-built nested comments**: flat comment data is converted to a recursive tree (`buildCommentTree.ts`) for O(n) construction instead of repeated filtering.
+- **`dir="auto"` per content block** instead of a global RTL flip — UI chrome stays LTR while user-generated Arabic/English content auto-detects its own direction.
+- **Code-split routes**: each page lazy-loads independently, keeping the initial bundle under 2kB per route.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Features
+- Three post types with type-specific rendering and validation
+- Nested comment threads with unlimited reply depth
+- Like and Follow with optimistic UI updates
+- Functional post creation form
+- Loading skeletons, empty states, and error states throughout
+- Fully responsive dark-mode UI
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Running Locally
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Run these commands in order:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+1. `npm install`
+2. `npm run dev`
+
+## Project Structure
+
+- `src/components/` — Presentational components (UI, feed, post, layout)
+- `src/features/` — State management (Zustand stores)
+- `src/pages/` — Route-level components
+- `src/data/` — Mock data (to be replaced by API calls)
+- `src/types/` — Shared TypeScript interfaces
+- `src/lib/` — Utility functions
+
+## What's Next
+
+This frontend is feature-complete and ready for backend integration. The next phase replaces `src/data/mockData.ts` with real API calls inside `features/*/api/`, with no changes needed to any presentational component.

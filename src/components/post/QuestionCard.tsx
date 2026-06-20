@@ -15,8 +15,8 @@ export function QuestionCard({ post }: Props) {
         )}
       </div>
 
-      <h3 className="font-semibold text-zinc-100">{post.title}</h3>
-      <p className="text-zinc-400 text-sm leading-relaxed">{post.content}</p>
+      <h3 className="font-semibold text-zinc-100" dir="auto">{post.title}</h3>
+      <p className="text-zinc-400 text-sm leading-relaxed" dir="auto">{post.content}</p>
 
       <div className="flex gap-2 flex-wrap">
         {post.tags.map((tag) => (

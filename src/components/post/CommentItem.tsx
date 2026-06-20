@@ -33,7 +33,7 @@ export function CommentItem({ comment, users, depth = 0, onReply }: Props) {
             <span className="text-sm font-medium text-zinc-100">{author.displayName}</span>
             <span className="text-xs text-zinc-500">@{author.username}</span>
           </div>
-          <p className="text-sm text-zinc-300">{comment.content}</p>
+          <p className="text-sm text-zinc-300" dir="auto">{comment.content}</p>
           <div className="flex items-center gap-4 text-xs text-zinc-500 pt-1">
             <span>{comment.likesCount} likes</span>
             <button
@@ -50,6 +50,7 @@ export function CommentItem({ comment, users, depth = 0, onReply }: Props) {
                 value={replyText}
                 onChange={(e) => setReplyText(e.target.value)}
                 placeholder="Write a reply..."
+                dir="auto"
                 className="flex-1 bg-surface border border-border rounded-lg px-3 py-1.5 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-primary"
                 onKeyDown={(e) => e.key === 'Enter' && handleReplySubmit()}
               />

@@ -166,6 +166,7 @@ export function CreatePost() {
         value={content}
         onChange={(e) => setContent(e.target.value)}
         placeholder="Write your post content..."
+        dir="auto"
         rows={4}
         className="w-full bg-surface border border-border rounded-lg px-3 py-2 text-sm text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-primary resize-none"
       />
