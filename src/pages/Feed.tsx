@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import { mockPosts, mockUsers } from '../data/mockData';
 import { PostCard } from '../components/feed/PostCard';
 
@@ -11,11 +10,7 @@ export function Feed() {
         const author = mockUsers.find((u) => u.id === post.authorId);
         if (!author) return null;
 
-        return (
-          <Link key={post.id} to={`/post/${post.id}`} className="block">
-            <PostCard post={post} author={author} />
-          </Link>
-        );
+        return <PostCard key={post.id} post={post} author={author} />;
       })}
     </div>
   );

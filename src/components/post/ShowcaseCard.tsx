@@ -23,12 +23,22 @@ export function ShowcaseCard({ post }: Props) {
 
       <div className="flex gap-3 text-sm">
         {post.projectUrl && (
-          <a href={post.projectUrl} target="_blank" rel="noreferrer" className="text-primary hover:underline">
+          <a href={post.projectUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-primary hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
             Live Demo →
           </a>
         )}
         {post.repoUrl && (
-          <a href={post.repoUrl} target="_blank" rel="noreferrer" className="text-zinc-500 hover:underline">
+          <a href={post.repoUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="text-zinc-500 hover:underline"
+            onClick={(e) => e.stopPropagation()}
+          >
             Source Code →
           </a>
         )}

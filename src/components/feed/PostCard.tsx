@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import type { Post, User } from '../../types';
 import { Avatar } from '../ui/Avatar';
 import { BuildLogCard } from '../post/BuildLogCard';
@@ -10,8 +11,13 @@ interface Props {
 }
 
 export function PostCard({ post, author }: Props) {
+  const navigate = useNavigate();
+
   return (
-    <article className="bg-surface border border-border rounded-xl p-4 space-y-3">
+    <article
+      onClick={() => navigate(`/post/${post.id}`)}
+      className="bg-surface border border-border rounded-xl p-4 space-y-3 cursor-pointer hover:border-zinc-700 transition-colors"
+    >
       <div className="flex items-center gap-3">
         <Avatar src={author.avatarUrl} alt={author.displayName} size="sm" />
         <div>
@@ -20,9 +26,7 @@ export function PostCard({ post, author }: Props) {
         </div>
       </div>
 
-      {post.type === 'build-log' && (
-        <BuildLogCard post={post} />
-      )}
+      {post.type === 'build-log' && <BuildLogCard post={post} />}
       {post.type === 'question' && <QuestionCard post={post} />}
       {post.type === 'showcase' && <ShowcaseCard post={post} />}
 
