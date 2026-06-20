@@ -4,6 +4,7 @@ import { Avatar } from '../ui/Avatar';
 import { BuildLogCard } from '../post/BuildLogCard';
 import { QuestionCard } from '../post/QuestionCard';
 import { ShowcaseCard } from '../post/ShowcaseCard';
+import { usePostsStore } from '../../features/posts/postsStore';
 
 interface Props {
   post: Post;
@@ -12,6 +13,8 @@ interface Props {
 
 export function PostCard({ post, author }: Props) {
   const navigate = useNavigate();
+  const toggleLike = usePostsStore((state) => state.toggleLike);
+  const isLiked = usePostsStore((state) => state.likedPostIds.has(post.id));
 
   return (
     <article
@@ -30,9 +33,19 @@ export function PostCard({ post, author }: Props) {
       {post.type === 'question' && <QuestionCard post={post} />}
       {post.type === 'showcase' && <ShowcaseCard post={post} />}
 
-      <div className="flex items-center gap-4 pt-2 text-xs text-zinc-500 border-t border-border">
-        <span>{post.likesCount} likes</span>
-        <span>{post.commentsCount} comments</span>
+      <div className="flex items-center gap-4 pt-2 text-xs border-t border-border">
+        <button
+          onClick={(e) => {
+            e.stopPropagation();
+            toggleLike(post.id);
+          }}
+          className={`flex items-center gap-1 transition-colors ${
+            isLiked ? 'text-primary' : 'text-zinc-500 hover:text-zinc-300'
+          }`}
+        >
+          {isLiked ? '♥' : '♡'} {post.likesCount} likes
+        </button>
+        <span className="text-zinc-500">{post.commentsCount} comments</span>
       </div>
     </article>
   );

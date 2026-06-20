@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { Post, PostType } from '../types';
-import { usePosts } from '../features/posts/PostsContext';
+import { usePostsStore } from '../features/posts/postsStore';
 
 const typeLabels: Record<PostType, string> = {
   'build-log': 'Build Log',
@@ -11,8 +11,8 @@ const typeLabels: Record<PostType, string> = {
 
 export function CreatePost() {
   const navigate = useNavigate();
-  const { addPost } = usePosts();
-  const currentUserId = 'u1'; // محل auth لاحقًا
+  const addPost = usePostsStore((state) => state.addPost);
+  const currentUserId = 'u1';
 
   const [postType, setPostType] = useState<PostType>('build-log');
   const [content, setContent] = useState('');
