@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Comment, User } from '../../types';
+import type { Comment } from '../../types';
 import { buildCommentTree } from '../../lib/buildCommentTree';
 import { CommentItem } from './CommentItem';
 import { mockUsers } from '../../data/mockData';

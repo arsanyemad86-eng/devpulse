@@ -1,19 +1,57 @@
+import { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/layout/Layout';
-import { Feed } from './pages/Feed';
-import { Profile } from './pages/Profile';
-import { PostDetail } from './pages/PostDetail';
-import { CreatePost } from './pages/CreatePost';
+
+const Feed = lazy(() => import('./pages/Feed').then((m) => ({ default: m.Feed })));
+const Profile = lazy(() => import('./pages/Profile').then((m) => ({ default: m.Profile })));
+const PostDetail = lazy(() => import('./pages/PostDetail').then((m) => ({ default: m.PostDetail })));
+const CreatePost = lazy(() => import('./pages/CreatePost').then((m) => ({ default: m.CreatePost })));
+
+function PageFallback() {
+  return (
+    <div className="max-w-2xl mx-auto py-8 px-4">
+      <div className="h-6 w-32 bg-surface rounded animate-pulse" />
+    </div>
+  );
+}
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
-          <Route path="/" element={<Feed />} />
-          <Route path="/profile/:userId" element={<Profile />} />
-          <Route path="/post/:postId" element={<PostDetail />} />
-          <Route path="/create" element={<CreatePost />} />
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<PageFallback />}>
+                <Feed />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/profile/:userId"
+            element={
+              <Suspense fallback={<PageFallback />}>
+                <Profile />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/post/:postId"
+            element={
+              <Suspense fallback={<PageFallback />}>
+                <PostDetail />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/create"
+            element={
+              <Suspense fallback={<PageFallback />}>
+                <CreatePost />
+              </Suspense>
+            }
+          />
         </Route>
       </Routes>
     </BrowserRouter>
