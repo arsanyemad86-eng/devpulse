@@ -4,7 +4,7 @@ A community platform for Arabic-speaking developers to share build logs, ask tec
 
 ## Live Demo
 
-[Add your Vercel deployment link here]
+https://devpulse-two-rho.vercel.app
 
 ## Why DevPulse
 
